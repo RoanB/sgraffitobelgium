@@ -1,13 +1,13 @@
 <?php
 /**
- * Province class
+ * Functionality class
  *
  * @author Roan Buysse <roan@tigron.be>
  */
 
 use \Skeleton\Database\Database;
 
-class Province {
+class Actor_Functionality {
 	use \Skeleton\Object\Model;
 	use \Skeleton\Object\Get;
 	use \Skeleton\Object\Save;
@@ -19,4 +19,5 @@ class Province {
 	 * @var array $text_fields
 	 */
 	private static $object_text_fields = [ 'name' ];
+
 }

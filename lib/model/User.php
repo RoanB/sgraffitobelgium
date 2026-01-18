@@ -2,7 +2,7 @@
 /**
  * User
  *
- * @author Lionel Laffineur <lionel@tigron.be>
+ * @author Roan Buysse <roan@tigron.be>
  */
 
 use \Skeleton\Database\Database;

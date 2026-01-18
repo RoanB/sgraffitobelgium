@@ -298,15 +298,6 @@ class Migration_20251017_170550_Init extends \Skeleton\Database\Migration {
 		}
 
 		$db->query("
-			CREATE TABLE `user_type` (
-			`id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`created` datetime NOT NULL,
-			`updated` datetime NULL,
-			`archived` datetime NULL
-			);
-		");
-
-		$db->query("
 			CREATE TABLE `user` (
 			`id` int NOT NULL AUTO_INCREMENT,
 			`uuid` varchar(36) DEFAULT NULL,
@@ -335,6 +326,395 @@ class Migration_20251017_170550_Init extends \Skeleton\Database\Migration {
 		$db->query("
 			ALTER TABLE `file`
 			ADD `updated` datetime NULL;
+		");
+
+		$db->query("
+			CREATE TABLE `province` (
+			`id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`country_id` int NOT NULL,
+			`identifier` varchar(128) NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` timestamp NULL,
+			FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
+			);
+		");
+
+		$province = new \Province();
+		$province->identifier = 'east_flanders';
+		$province->country_id = (Country::get_by_code('BE'))->id;
+		$province->text_nl_name = 'Oost Vlaanderen';
+		$province->text_en_name = 'East Flanders';
+		$province->save();
+
+
+		$db->query("
+			CREATE TABLE `actor_role` (
+			`id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`identifier` varchar(128) NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` timestamp NULL
+			);
+		");
+
+		$actor_role = new \Actor_Role();
+		$actor_role->identifier = 'pioneer';
+		$actor_role->text_en_name = 'Pioneer';
+		$actor_role->text_nl_name = 'Pionier';
+		$actor_role->text_fr_name = 'Pionnier';
+		$actor_role->save();
+
+		$actor_role = new \Actor_Role();
+		$actor_role->identifier = 'masters';
+		$actor_role->text_en_name = 'Masters';
+		$actor_role->text_nl_name = 'Meesters';
+		$actor_role->text_fr_name = 'Maîtres';
+		$actor_role->save();
+
+		$actor_role = new \Actor_Role();
+		$actor_role->identifier = 'followers';
+		$actor_role->text_en_name = 'Followes';
+		$actor_role->text_nl_name = 'Volgers';
+		$actor_role->text_fr_name = 'Suiveurs';
+		$actor_role->save();
+
+		$actor_role = new \Actor_Role();
+		$actor_role->identifier = 'heirs';
+		$actor_role->text_en_name = 'Heirs';
+		$actor_role->text_nl_name = 'Erfgenamen';
+		$actor_role->text_fr_name = 'Héritiers';
+		$actor_role->save();
+
+		$db->query("
+			CREATE TABLE `style` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`identifier` varchar(128) NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` datetime NULL
+			);
+		");
+
+		$style = new \Style();
+		$style->identifier = 'neo_renaissance';
+		$style->text_en_name = 'Neo-Renaissance';
+		$style->text_nl_name = 'Neo-Renaissance';
+		$style->text_fr_name = 'Neo-Renaissance';
+		$style->save();
+
+		$style = new \Style();
+		$style->identifier = 'art_nouveau';
+		$style->text_en_name = 'Art Nouveau';
+		$style->text_nl_name = 'Art Nouveau';
+		$style->text_fr_name = 'Art Nouveau';
+		$style->save();
+
+		$style = new \Style();
+		$style->identifier = 'neo_renaissance';
+		$style->text_en_name = 'Neo Renaissance';
+		$style->text_nl_name = 'Neo Renaissance';
+		$style->save();
+
+		$db->query("
+			CREATE TABLE `actor_functionality` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`identifier` varchar(128) NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` datetime NULL
+			);
+		");
+
+		$function = new \Actor_Functionality();
+		$function->identifier = 'contractor';
+		$function->text_en_name = 'Contractor';
+		$function->text_nl_name = 'Aannemer';
+		$function->text_fr_name = 'Entrepreneur';
+		$function->save();
+
+		$function = new \Actor_Functionality();
+		$function->identifier = 'arhitect';
+		$function->text_en_name = 'Architect';
+		$function->text_nl_name = 'Architect';
+		$function->text_fr_name = 'Architect';
+		$function->save();
+
+		$function = new \Actor_Functionality();
+		$function->identifier = 'decorator';
+		$function->text_en_name = 'Decorator';
+		$function->text_nl_name = 'Aannemer';
+		$function->text_fr_name = 'Decorateur';
+		$function->save();
+
+		// $function = new \Function();
+		// $function->identifier = 'contractor';
+		// $function->text_en_name = 'Contractor';
+		// $function->text_nl_name = 'Aannemer';
+		// $function->save();
+
+		$function = new \Actor_Functionality();
+		$function->identifier = 'client';
+		$function->text_en_name = 'Client';
+		$function->text_nl_name = 'Opdrachtgever';
+		$function->text_fr_name = 'Client';
+		$function->save();
+
+		$db->query("
+			CREATE TABLE `application_method` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`identifier` varchar(128) NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` datetime NULL
+			);
+		");
+
+		$ap_method = new \Application_Method();
+		$ap_method->identifier = 'standard';
+		$ap_method->text_en_name = 'Standard';
+		$ap_method->text_nl_name = 'Standaard';
+		$ap_method->text_fr_name = 'Standard';
+		$ap_method->save();
+
+		$ap_method = new \Application_Method();
+		$ap_method->identifier = 'separated';
+		$ap_method->text_en_name = 'Separated';
+		$ap_method->text_nl_name = 'Opgedeeld';
+		$ap_method->text_fr_name = 'Séparé';
+		$ap_method->save();
+
+		$ap_method = new \Application_Method();
+		$ap_method->identifier = 'placed_later';
+		$ap_method->text_en_name = 'Placed Later';
+		$ap_method->text_nl_name = 'Later in geplaatst';
+		$ap_method->text_fr_name = 'Ajouté ultérieurement';
+		$ap_method->save();
+
+		$db->query("
+			CREATE TABLE `sgraffito_condition` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`identifier` varchar(128) NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` datetime NULL
+			);
+		");
+
+		$condition = new \Sgraffito_Condition();
+		$condition->identifier = 'good';
+		$condition->text_en_name = 'Good state';
+		$condition->text_nl_name = 'Goeie staat';
+		$condition->text_fr_name = 'Bonne état';
+		$condition->save();
+
+		$condition = new \Sgraffito_Condition();
+		$condition->identifier = 'overpainted';
+		$condition->text_en_name = 'Overpainted';
+		$condition->text_nl_name = 'Overschilderd';
+		$condition->text_fr_name = 'Recouvert';
+		$condition->save();
+
+		$condition = new \Sgraffito_Condition();
+		$condition->identifier = 'polluted';
+		$condition->text_en_name = 'Polluted';
+		$condition->text_nl_name = 'Vervuild';
+		$condition->text_fr_name = 'Pollué';
+		$condition->save();
+
+		$condition = new \Sgraffito_Condition();
+		$condition->identifier = 'demolished';
+		$condition->text_en_name = 'Demolished';
+		$condition->text_nl_name = 'Gesloopt';
+		$condition->text_fr_name = 'Démoli';
+		$condition->save();
+
+		$db->query("
+			CREATE TABLE `sgraffito_placement` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`identifier` varchar(128) NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` datetime NULL
+			);
+		");
+
+		$placement = new \Sgraffito_Placement();
+		$placement->identifier = 'parapet';
+		$placement->text_en_name = 'Parapet';
+		$placement->text_nl_name = 'Borstwering';
+		$placement->text_fr_name = 'Garde-corps';
+		$placement->save();
+
+		$placement = new \Sgraffito_Placement();
+		$placement->identifier = 'arc_field';
+		$placement->text_en_name = 'Arc Field';
+		$placement->text_nl_name = 'Boogveld';
+		$placement->text_fr_name = 'Champ de courbure';
+		$placement->save();
+
+		$db->query("
+			CREATE TABLE `theme` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`identifier` varchar(128) NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` datetime NULL
+			);
+		");
+
+		$theme = new \Theme();
+		$theme->identifier = 'art';
+		$theme->text_en_name = 'Arts';
+		$theme->text_nl_name = 'Kunst';
+		$theme->text_fr_name = 'Arts';
+		$theme->save();
+
+		$theme = new \Theme();
+		$theme->identifier = 'floral';
+		$theme->text_en_name = 'Floral';
+		$theme->text_nl_name = 'Floraal';
+		$theme->text_fr_name = 'Floral';
+		$theme->save();
+
+		$db->query("
+			CREATE TABLE `building_type` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`identifier` varchar(128) NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` datetime NULL
+			);
+		");
+
+		$building_type = new \Building_Type();
+		$building_type->identifier = 'townhouse';
+		$building_type->text_en_name = 'Townhouse';
+		$building_type->text_nl_name = 'Burgerhuis';
+		$building_type->text_fr_name = 'Manoir';
+
+		$building_type = new \Building_Type();
+		$building_type->identifier = 'school';
+		$building_type->text_en_name = 'School';
+		$building_type->text_nl_name = 'School';
+		$building_type->text_fr_name = 'École';
+		$building_type->save();
+
+		$building_type = new \Building_Type();
+		$building_type->identifier = 'church';
+		$building_type->text_en_name = 'Church';
+		$building_type->text_nl_name = 'Kerk';
+		$building_type->text_fr_name = 'Église';
+		$building_type->save();
+
+		$building_type = new \Building_Type();
+		$building_type->identifier = 'warehouse';
+		$building_type->text_en_name = 'Warehouse';
+		$building_type->text_nl_name = 'Magazijn';
+		$building_type->text_fr_name = 'Entrepot';
+		$building_type->save();
+
+		$db->query("
+			CREATE TABLE `actor` (
+				`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				`picture_id` int NULL,
+				`style_id` int NULL,
+				`actor_functionality_id` int NULL,
+				`actor_role_id` int NULL,
+				`firstname` varchar(128) NOT NULL,
+				`lastname` varchar(128) NOT NULL,
+				`birth_date` date NULL,
+				`death_date` date NULL,
+				`created` datetime NOT NULL,
+				`updated` datetime NULL,
+				`archived` datetime NULL,
+				FOREIGN KEY (`picture_id`) REFERENCES `picture` (`id`),
+				FOREIGN KEY (`style_id`) REFERENCES `style` (`id`),
+				FOREIGN KEY (`actor_functionality_id`) REFERENCES `actor_functionality` (`id`),
+				FOREIGN KEY (`actor_role_id`) REFERENCES `actor_role` (`id`)
+			);
+		");
+
+		$db->query("
+			CREATE TABLE `building` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`picture_id` int NULL,
+			`building_type_id` int NULL,
+			`country_id` int NOT NULL,
+			`province_id` int NULL,
+			`name` varchar(128) NULL,
+			`build_year` varchar(128) NULL,
+			`street` varchar(128) NULL,
+			`house_number` varchar(64) NULL,
+			`zip` varchar(64) NULL,
+			`city` varchar(64) NULL,
+			`longitude` varchar(128) NULL,
+			`lattitude` varchar(128) NULL,
+			`notes` text NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` datetime NULL,
+			FOREIGN KEY (`picture_id`) REFERENCES `picture` (`id`),
+			FOREIGN KEY (`building_type_id`) REFERENCES `building_type` (`id`),
+			FOREIGN KEY (`country_id`) REFERENCES `country` (`id`),
+			FOREIGN KEY (`province_id`) REFERENCES `province` (`id`)
+			);
+		");
+
+		$db->query("
+			CREATE TABLE `sgraffito` (
+			`id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`picture_id` int NOT NULL,
+			`style_id` int NOT NULL,
+			`theme_id` int NOT NULL,
+			`application_method_id` int NOT NULL,
+			`sgraffito_placement_id` int NOT NULL,
+			`sgraffito_condition_id` int NOT NULL,
+			`figurative_decorative` enum('figurative','decoractive') NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			`archived` datetime NULL,
+			FOREIGN KEY (`picture_id`) REFERENCES `picture` (`id`),
+			FOREIGN KEY (`style_id`) REFERENCES `style` (`id`),
+			FOREIGN KEY (`theme_id`) REFERENCES `theme` (`id`),
+			FOREIGN KEY (`application_method_id`) REFERENCES `application_method` (`id`),
+			FOREIGN KEY (`sgraffito_placement_id`) REFERENCES `sgraffito_placement` (`id`),
+			FOREIGN KEY (`sgraffito_condition_id`) REFERENCES `sgraffito_condition` (`id`)
+			);
+		");
+
+		$db->query("
+			CREATE TABLE `sgraffito_actor` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`sgraffito_id` int NOT NULL,
+			`actor_id` int NOT NULL,
+			`created` datetime NOT NULL,
+			FOREIGN KEY (`sgraffito_id`) REFERENCES `sgraffito` (`id`),
+			FOREIGN KEY (`actor_id`) REFERENCES `actor` (`id`)
+			);
+		");
+
+		$db->query("
+			CREATE TABLE `sgraffito_building` (
+			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`sgraffito_id` int NOT NULL,
+			`building_id` int NOT NULL,
+			`created` datetime NOT NULL,
+			FOREIGN KEY (`sgraffito_id`) REFERENCES `sgraffito` (`id`),
+			FOREIGN KEY (`building_id`) REFERENCES `building` (`id`)
+			);
+		");
+
+		$db->query("
+			CREATE TABLE `object_picture` (
+			`id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`classname` varchar(64) NOT NULL,
+			`object_id` int(11) NOT NULL,
+			`picture_id` int NOT NULL,
+			`created` datetime NOT NULL,
+			`updated` datetime NULL,
+			FOREIGN KEY (`picture_id`) REFERENCES `picture` (`id`)
+			);
 		");
 	}
 

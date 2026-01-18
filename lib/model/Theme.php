@@ -1,13 +1,13 @@
 <?php
 /**
- * Province class
+ * Theme class
  *
  * @author Roan Buysse <roan@tigron.be>
  */
 
 use \Skeleton\Database\Database;
 
-class Province {
+class Theme {
 	use \Skeleton\Object\Model;
 	use \Skeleton\Object\Get;
 	use \Skeleton\Object\Save;
@@ -18,5 +18,5 @@ class Province {
 	 * @access private
 	 * @var array $text_fields
 	 */
-	private static $object_text_fields = [ 'name' ];
+	private static $object_text_fields = [ 'name', 'notes' ];
 }
