@@ -1,0 +1,23 @@
+{
+    "name": "tigron/skeleton-database",
+    "description": "Tigron Skeleton Mysql database layer",
+    "type": "library",
+    "require": {
+		"ext-mysqli": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tigron BVBA",
+            "email": "support@tigron.be"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Skeleton\\Database\\": "lib/Skeleton/Database/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.2.x-dev"
+        }
+    }
+}

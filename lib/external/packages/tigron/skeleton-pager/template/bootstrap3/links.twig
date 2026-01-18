@@ -1,0 +1,37 @@
+<ul class="pagination pagination-centered" id="pager-{{ classname|replace({'_': '-'}) }}">
+{% for link in links %}
+	{% set disabled = false %}
+
+	<!-- if previous link and first page is active -->
+	{% if link.page == 'previous' and links.1.active %}
+		{% set disabled = true %}
+	{% endif %}
+
+	<!-- if next link and last page is active -->
+	{% if link.page == 'next' and links[(links|length) - 2].active %}
+		{% set disabled = true %}
+	{% endif %}
+	<li class="{% if link.active %}active{% endif %}{% if disabled %} disabled{% endif %}">
+		<a{% if disabled == false %} href="{{ link.url }}"{% endif %} class="skeleton-pager-link">
+			{% if link.page == 'previous' %}
+				&laquo;
+			{% elseif link.page == 'next' %}
+				&raquo;
+			{% else %}
+				{{ link.page }}
+			{% endif %}
+		</a>
+	</li>
+	{% if loop.last and options.jump_to %}
+	<li>
+		<span class="jump-to-page" style="padding: 4px">
+			<input type="text" size="4" style="border: solid 1px #eee; text-align: center;"  placeholder="#" id="jump-to-page-{{ classname|replace({'_': '-'}) }}">
+		</span>
+	</li>
+	{% endif %}
+{% endfor %}
+</ul>
+
+{% if options.jump_to %}
+	<script src="/skeleton-pager/script.js" charset="UTF-8"></script>
+{% endif %}

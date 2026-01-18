@@ -1,0 +1,9 @@
+/config/environment.php
+/tmp/twig/*
+/tmp/log/*
+/tmp/languages/*
+/lib/external/packages/*
+/lib/external/assets/*
+/composer.lock
+/migrations/db_version
+/util/tmp/*

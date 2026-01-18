@@ -1,0 +1,66 @@
+{% import "_default/macro.tabler.twig" as tabler %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<!-- Dashboard Core -->
+	<link href="/tabler--core/dist/css/tabler.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/tabler-icons.min.css"/>
+	<link rel="stylesheet" href="/select2/dist/css/select2.min.css" />
+	<link rel="stylesheet" href="/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css" />
+	<link rel="stylesheet" href="/intl-tel-input/build/css/intlTelInput.css">
+	<link rel="stylesheet" href="/base.css?v=20250612">
+	<title>When digital invoicing meets ancient Egypt</title>
+	<script src="/jquery/dist/jquery.min.js"></script>
+
+</head>
+<body>
+	<div class="page page-center">
+		<div class="container container-tight py-4">
+			<div class="text-center mb-4">
+				<a href="" class="navbar-brand navbar-brand-autodark">
+					<img src="/peppyrus.png" style="height: 48px;">
+				</a>
+			</div>
+			{% if environment != 'production' %}
+				<div class="alert alert-warning text-center rounded-0 text-center d-block" role="alert">
+					<strong>{% trans 'Notice' %}</strong>: {% trans 'You are currently working in a test environment.' %}
+					<br>
+					{% trans 'All data and actions performed here are for testing purposes only and will not affect the live system.' %}
+				</div>
+			{% endif %}
+			{% block content %}{% endblock %}
+		</div>
+	</div>
+	<script src="/tigron-confirm-modal/js/bootstrap.confirm-modal.js"></script>
+	<script src="/select2/dist/js/select2.full.min.js"></script>
+	<script src="/tabler--core/dist/js/tabler.min.js"></script>
+	<script src="/intl-tel-input/build/js/intlTelInput.min.js"></script>
+	<script src="/base.js?v=20250612"></script>
+	<script>
+		function toggle_password() {
+			if ($('#password').attr('type') == 'password') {
+				$('#password').attr('type', 'text');
+				$('#show_password').html('{{ tabler.icon("eye-off") }}');
+			} else {
+				$('#password').attr('type', 'password');
+				$('#show_password').html('{{ tabler.icon("eye") }}');
+			}
+		}
+	</script>
+	{% if environment != 'development' and env.session.admin_user is not defined %}
+		<script>
+			(function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;
+				w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)},a=d.createElement(t),
+				m=d.getElementsByTagName(t)[0];a.async=1;a.src=u;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://mautic.tigron.be/mtc.js','mt');
+
+			{% if env.session.user is defined %}
+				mt('send', 'pageview', {firstname: '{{ env.session.user.firstname }}', lastname: '{{ env.session.user.lastname }}', email: '{{ env.session.user.email }}', tags: 'peppyrus' });
+			{% else %}
+				mt('send', 'pageview', { tags: 'peppyrus' });
+			{% endif %}
+		</script>
+	{% endif %}
+</body>
+</html>

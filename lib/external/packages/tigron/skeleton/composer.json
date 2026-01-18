@@ -1,0 +1,26 @@
+{
+    "config": {
+        "vendor-dir": "lib/external/packages"
+    },
+    "name": "tigron/skeleton",
+    "description": "Tigron Skeleton",
+    "type": "project",
+    "require": {
+        "tigron/skeleton-application-web": "*",
+        "tigron/skeleton-console": "*",
+        "tigron/skeleton-core": "*",
+        "tigron/skeleton-database": "*",
+        "tigron/skeleton-error": "*",
+        "tigron/skeleton-migrate": "*",
+        "tigron/skeleton-object": "*",
+        "tigron/skeleton-template": "*",
+        "tigron/skeleton-template-twig": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tigron BVBA",
+            "email": "support@tigron.be"
+        }
+    ]
+}

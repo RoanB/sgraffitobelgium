@@ -1,0 +1,19 @@
+{
+    "name": "tigron/skeleton-console",
+    "description": "A console application to interact with Skeleton packages",
+    "type": "library",
+    "require": {
+		"symfony/console": "5.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tigron BVBA",
+            "email": "support@tigron.be"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Skeleton\\Console\\": "lib/Skeleton/Console/" }
+    },
+    "bin": [ "bin/skeleton" ]
+}

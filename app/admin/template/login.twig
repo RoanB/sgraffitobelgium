@@ -1,0 +1,58 @@
+{% import "_default/macro.tabler.twig" as tabler %}
+{% extends "_default/layout.login.twig" %}
+{% block content %}
+	{% if env.sticky_session.message == 'user_created' %}
+		{{ tabler.alert('success', 'Your user was successfully created.'|trans ~ ' ' ~ 'You will receive an e-mail to verify your account.'|trans) }}
+	{% elseif env.sticky_session.message == 'verify_success' %}
+		{{ tabler.alert('success', 'Your account was successfully verified.'|trans ~ ' ' ~ 'You are able to sign in now!'|trans) }}
+	{% elseif env.sticky_session.message == 'password_reset_success' %}
+		{{ tabler.alert('success', 'Your new password was successfully stored.'|trans ~ ' ' ~ 'You are able to sign in now!'|trans) }}
+	{% elseif env.sticky_session.message == 'invite_not_active' %}
+		{{ tabler.alert('warning', 'It seems that the invite you are trying to access is not active anymore.'|trans ~ ' ' ~ 'Please sign in below!'|trans) }}
+	{% elseif env.sticky_session.message == 'invite_accepted' %}
+		{{ tabler.alert('success', 'You successfully accepted the invitation.'|trans ~ ' ' ~ 'Sign in to access the organization!'|trans) }}
+	{% elseif env.sticky_session.message == 'invite_rejected' %}
+		{{ tabler.alert('success', 'You successfully declined the invitation.'|trans) }}
+	{% endif %}
+
+	<div class="card card-md">
+		<div class="card-body">
+			<h2 class="text-center mb-4">{% trans 'Sign in to your account' %}</h2>
+			{% if errors.password is defined or errors.login is defined %}
+				{{ tabler.alert('danger', 'Invalid e-mail or password.'|trans) }}
+			{% endif %}
+			<form action="" method="post">
+				<div class="mb-3">
+					<label for="email" class="form-label">{% trans 'E-mail address' %}</label>
+					<input type="email" class="form-control" id="email" aria-describedby="email" placeholder="your@email.com" name="login" value="{{ env.post.login|default(env.cookie.peppyrus_login) }}"{% if env.post.login|default(env.cookie.peppyrus_login) is empty %} autofocus{% endif %}>
+				</div>
+				<div class="mb-2">
+					<label class="form-label">
+					{% trans 'Password' %}
+					<span class="form-label-description">
+						<a href="/password/reset">{% trans 'I forgot my password' %}</a>
+					</span>
+					</label>
+					<div class="input-group input-group-flat">
+						<input name="password" type="password" class="form-control" placeholder="{% trans 'Your password' %}" id="password" autocomplete="off" {% if env.post.login|default(env.cookie.peppyrus_login) is not empty %} autofocus{% endif %}>
+						<span class="input-group-text">
+							<a href="javascript:toggle_password()" class="link-secondary" id="show_password">
+								{{ tabler.icon('eye') }}
+							</a>
+						</span>
+					</div>
+				</div>
+				<div class="mb-2">
+					<label class="form-check">
+						<input type="checkbox" class="form-check-input" name="remember"{% if env.cookie.peppyrus_login is not empty %} checked{% endif %}>
+						<span class="form-check-label">{% trans 'Remember me' %}</span>
+					</label>
+				</div>
+				<div class="form-footer">
+					<button type="submit" class="btn btn-primary w-100">{% trans 'Sign in' %}</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="text-center text-secondary mt-3">{% trans "Don't have account yet?" %} <a href="/register?reset=true" tabindex="-1">{% trans 'Sign up' %}</a></div>
+{% endblock content %}

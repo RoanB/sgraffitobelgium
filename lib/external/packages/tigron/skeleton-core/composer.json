@@ -1,0 +1,18 @@
+{
+    "name": "tigron/skeleton-core",
+    "description": "Core functionality for Skeleton",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tigron BVBA",
+            "email": "support@tigron.be"
+        }
+    ],
+    "suggest": {
+        "tigron/skeleton-template": "*"
+    },
+    "autoload": {
+        "psr-4": { "Skeleton\\Core\\": "lib/Skeleton/Core/" }
+    }
+}
