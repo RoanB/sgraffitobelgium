@@ -1,1 +1,27 @@
-DAG STOUTERIK
+{% extends '_default/layout.base.twig' %}
+{% import "_default/macro.tabler.twig" as tabler %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block content %}
+	<div class="container container-tight py-4">
+		<div class="text-center mb-4">
+			<img src="/sgraffito.png" width="40" height="40" alt="Tabler" class="">
+			<span class="h2">{% trans 'We will create some kind of nice dashboard at the end' %}</span>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		document.getElementById('password-toggle').addEventListener('click', function() {
+			password_input = document.getElementById('password-input');
+			if (password_input.type === 'password') {
+				password_input.type = 'text';
+			} else {
+				password_input.type = 'password';
+			}
+		});
+	</script>
+{% endblock content %}
+
+

@@ -4,8 +4,26 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d37498a64aab16d5e86cddd3a9413840",
+    "content-hash": "4cc7b412e16d00466f4b8af90d731dca",
     "packages": [
+        {
+            "name": "bower-asset/tigron-confirm-modal",
+            "version": "v0.0.11",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:tigron/confirm-modal.git",
+                "reference": "de68fd12df15391533cd189ccc9465a67a0f6494"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tigron/confirm-modal/zipball/de68fd12df15391533cd189ccc9465a67a0f6494",
+                "reference": "de68fd12df15391533cd189ccc9465a67a0f6494"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
         {
             "name": "michelf/php-markdown",
             "version": "2.0.0",
@@ -68,6 +86,18 @@
             "dist": {
                 "type": "tar",
                 "url": "https://registry.npmjs.org/bootstrap/-/bootstrap-5.3.7.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/jquery",
+            "version": "4.0.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/jquery/-/jquery-4.0.0.tgz"
             },
             "type": "npm-asset",
             "license": [

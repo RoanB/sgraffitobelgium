@@ -1,0 +1,148 @@
+{% import '_default/macro.tabler.twig' as tabler %}
+{% extends '_default/layout.base.twig' %}
+
+{% block header_title %}{% trans "Building types" %}{% endblock header_title %}
+
+{% block header_breadcrumb %}
+	<li class="breadcrumb-item active" aria-current="page"><a href="#">{% trans "Building types" %}</a></li>
+{% endblock header_breadcrumb %}
+
+{% block content %}
+    {% if env.sticky_session.message == 'created' %}
+        {{ tabler.alert('success', 'The building type has been created successfully.'|trans, '', true) }}
+    {% elseif env.sticky_session.message == 'expired_session' %}
+        {{ tabler.alert('danger', 'The session has been expired. Please try again.'|trans, '', true) }}
+    {% endif %}
+		<div class="row row-cards">
+			<div id="filter-card" class="{% if env.session.advanced_search is empty or env.session.advanced_search == 'false' %} d-none {% endif %} col-lg-3  pull-right ">
+				<div class="card">
+					<div class="card-header border-bottom" style="height: 60px">
+						<div class="d-flex">
+							<div class="text-secondary col-12">
+								<btn class="btn  btn-primary btn-sm" onclick="toggle_advanced(this)">{{ tabler.icon('adjustments-horizontal') }}</btn>
+								{% trans "Search" %}: <span class="text-muted fs-5">{{ pager.item_count }} {% trans 'results' %}</span>
+							</div>
+						</div>
+					</div>
+					<form id="filter-form" class="form" action="/building/type" method="post">
+						<div class="card-body">
+							<label class="col-form-label py-0">{% trans "Search" %}</label>
+							<div class="mb-0">
+								<div class="mb-0">
+									<input type="text" name="search" class="form-control" placeholder="{% trans 'Search' %}" aria-label="{% trans "Search building type" %}" value="{{ pager.get_search() }}"/>
+								</div>
+							</div>
+							<div class="mb-0">
+								<label class="col-form-label py-0">{% trans "Customer" %}</label>
+								<div class="mb-0">
+									<select name="customer_uuid" class="form-control select-ajax" data-placeholder="{% trans 'Search a customer...' %}" data-ajax-url="/administrative/customer?action=ajax_search">
+										{% if filter.customer is defined %}
+											<option value="{{ filter.customer.uuid }}" selected="selected">{{ filter.customer.get_display_name() }}</option>
+										{% endif %}
+									</select>
+								</div>
+							</div>
+							<div class="mb-0">
+								<label class="col-md-2 col-6  col-form-label py-0">{% trans "Paid" %}</label>
+								<div class="mb-0">
+									<select name="paid" class="form-select" data-placeholder="---">
+										<option value="none">---</option>
+										<option value="0" {% if pager.has_condition('paid', 0) %} selected {% endif %}>{% trans "Unpaid" %}</option>
+										<option value="1" {% if pager.has_condition('paid', 1) %} selected {% endif %}>{% trans "Paid" %}</option>
+									</select>
+								</div>
+							</div>
+							<label class="col-form-label py-0">{% trans "Date" %}</label>
+							<div class="mb-0 row">
+								<div class="col-6">
+									<input type="text" class="col form-control datepicker" name="filter[from]" placeholder="{% trans "From" %}" value="{% if filter['from'] is not null %}{{ filter['from']|date }}{% endif %}"/>
+								</div>
+								<div class="col-6">
+									<input type="text" class="col form-control datepicker" name="filter[till]" placeholder="{% trans "Till" %}" value="{% if filter['till'] is not empty %}{{ filter['till']|date }}{% endif %}"/>
+								</div>
+							</div>
+							<label class="col-form-label py-0">{% trans "Expiration date" %}</label>
+							<div class="mb-0 row">
+								<div class="col-6">
+									<input type="text" class="col form-control datepicker" name="filter[from_expiration]" placeholder="{% trans "From" %}" value="{% if filter['from_expiration'] is not null %}{{ filter['from_expiration']|date }}{% endif %}"/>
+								</div>
+								<div class="col-6">
+									<input type="text" class="col form-control datepicker" name="filter[till_expiration]" placeholder="{% trans "Till" %}" value="{% if filter['till_expiration'] is not empty %}{{ filter['till_expiration']|date }}{% endif %}"/>
+								</div>
+							</div>
+							<div class="mt-3">
+								<button type="submit" class="btn btn-primary btn-4 w-100">{% trans "Search" %}</button>
+								<button id="reset-button" class="btn btn-link btn-3 w-100">
+									{% trans 'Reset to defaults' %}
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		{% set conditions = pager.get_conditions() %}
+			<div class="{% if env.session.advanced_search == 'true' %} col-lg-9 {% else %} col-12 {% endif %}" id="result-card">
+				<div class="card">
+					<div class="card-header border-bottom" style="height: 60px">
+						<div class="d-flex">
+							<div class="text-secondary col-12 {% if env.session.advanced_search == 'true' %} d-none {% endif %}" id="small-search" >
+							<btn class="btn btn-primary btn-sm" onclick="toggle_advanced(this)">{{ tabler.icon('adjustments-horizontal') }}</btn>
+								{% trans "Search" %}:
+								<div class="ms-2 d-inline-block">
+									<form method="post" action="/building/type">
+										<div class="input-group mb-0">
+											<input type="text" name="search" class="form-control form-control-sm" aria-label="{% trans "Search building type" %}" value="{{ pager.get_search() }}" />
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="card-actions">
+							<div class="dropdown">
+								<a href="#" class="btn-action dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{ tabler.icon('dots-vertical') }}
+								</a>
+								<div class="dropdown-menu dropdown-menu-end">
+									<a class="dropdown-item" href="/building/type?action=create_step1">{{ tabler.icon('plus', 'me-1') }}{% trans "Add building type" %}</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="table-responsive">
+						<table class="table card-table table-vcenter text-nowrap datatable table-striped table-hover">
+							{% if pager.items|length > 0 %}
+								<thead>
+								<tr>
+									<th>{{ pager.create_header('Name'|trans, 'identifier')|raw }}</th>
+									<th>{{ pager.create_header('Created'|trans, 'created')|raw }}</th>
+									<th class="w-1">&nbsp;</th>
+								</tr>
+								</thead>
+							{% endif %}
+							<tbody>
+							{% for building_type in pager.items %}
+								<tr{% if building_type.is_expired() %} class="table-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Expired"{% endif %}>
+									<td>{{ building_type.text_en_name }}</td>
+									<td>{{ building_type.created|date }}</td>
+									<td class="text-end">
+										<a href="/building/type/detail?number={{ building_type.number }}">
+											{{ tabler.icon('edit') }}
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					<div class="card-footer text-end d-flex align-items-center">
+						<p class="m-0 text-secondary">{{ pager.item_count }} {% trans "results" %}
+						{% if pager.items|length > 0 %}
+							{{ pager.links|raw }}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

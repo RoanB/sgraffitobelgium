@@ -1,6 +1,27 @@
 {
     "packages": [
         {
+            "name": "bower-asset/tigron-confirm-modal",
+            "version": "v0.0.11",
+            "version_normalized": "0.0.11.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:tigron/confirm-modal.git",
+                "reference": "de68fd12df15391533cd189ccc9465a67a0f6494"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tigron/confirm-modal/zipball/de68fd12df15391533cd189ccc9465a67a0f6494",
+                "reference": "de68fd12df15391533cd189ccc9465a67a0f6494"
+            },
+            "type": "bower-asset",
+            "installation-source": "dist",
+            "license": [
+                "MIT"
+            ],
+            "install-path": "../bower-asset/tigron-confirm-modal"
+        },
+        {
             "name": "michelf/php-markdown",
             "version": "2.0.0",
             "version_normalized": "2.0.0.0",
@@ -73,6 +94,21 @@
                 "MIT"
             ],
             "install-path": "../npm-asset/bootstrap"
+        },
+        {
+            "name": "npm-asset/jquery",
+            "version": "4.0.0",
+            "version_normalized": "4.0.0.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/jquery/-/jquery-4.0.0.tgz"
+            },
+            "type": "npm-asset",
+            "installation-source": "dist",
+            "license": [
+                "MIT"
+            ],
+            "install-path": "../npm-asset/jquery"
         },
         {
             "name": "npm-asset/popperjs--core",

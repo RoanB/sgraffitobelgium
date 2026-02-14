@@ -22,19 +22,19 @@ class Module extends \Skeleton\Application\Web\Event\Module {
 	public function bootstrap(\Skeleton\Application\Web\Module $module): void {
 		$template = \Skeleton\Application\Web\Template::get();
 
-		// // Bootstrap the application
-		// if ($module->is_login_required()) {
-		// 	if (isset($_SESSION['user']) === false) {
-		// 		Session::destroy();
-		// 		Session::start();
+		// Bootstrap the application
+		if ($module->is_login_required()) {
+			if (isset($_SESSION['user']) === false) {
+				Session::destroy();
+				Session::start();
 
-		// 		if (isset($_SERVER['REQUEST_URI'])) {
-		// 			$_SESSION['redirect_uri'] = $_SERVER['REQUEST_URI'];
-		// 		}
+				if (isset($_SERVER['REQUEST_URI'])) {
+					$_SESSION['redirect_uri'] = $_SERVER['REQUEST_URI'];
+				}
 
-		// 		Session::redirect('/login');
-		// 	}
-		// }
+				Session::redirect('/login');
+			}
+		}
 
 		if (isset($_SESSION['user'])) {
 			$template->assign('user', $_SESSION['user']);

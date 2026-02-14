@@ -35,5 +35,6 @@ class Index extends Module {
 	public function display(): void {
 		$template = Template::get();
 		$config = \Skeleton\Core\Config::get();
+
 	}
 }

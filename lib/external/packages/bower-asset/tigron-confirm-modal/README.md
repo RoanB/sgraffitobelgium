@@ -1,0 +1,36 @@
+# confirm-modal
+Bootstrap confirmation modal
+
+## Description
+
+This small plugin can be used to create confirmation modals when clicking a link
+
+## Installation
+
+Installation with bower:
+
+  `bower install tigron-confirm-modal`
+
+include the following line in your project:
+
+  `<script src="/bower_components/tigron-confirm-modal/js/bootstrap.confirm-modal.js"></script>`
+
+Activate:
+
+  `$('a[data-confirm-message]').confirmModal();`
+
+
+## Features
+
+The following attributes can be added to the link:
+
+	data-confirm-title: The title of the modal
+	data-confirm-message: The message in the dialog
+	data-confirm-btn-ok: The caption of the OK button (default: Ok)
+	data-confirm-btn-cancel: The caption of the Cancel button (default: Cancel)
+	data-confirm-callback-ok: Optional callback to run when the OK button is clicked
+	data-confirm-callback-cancel: Optional callback to run when the Cancel button is clicked
+
+## Bootstrap
+
+This plugin will create bootstrap confirmation modals. It support Bootstrap 3, Bootstrap 4 and Bootstrap5

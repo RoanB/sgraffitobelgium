@@ -1,0 +1,9 @@
+/* Override some defaults */
+:root {
+	--tblr-primary: #e1b05c;
+	--tblr-primary-rgb: 83, 213, 201;
+	--tblr-secondary: #7a7243;
+	--tblr-purple-rgb: 139, 130, 239;
+	--tblr-highlight-bg: #f7e150;
+	--fc-bg-event-opacity: 1;
+}

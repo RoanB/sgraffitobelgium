@@ -7,12 +7,6 @@
 			"php-http/discovery": false
 		}
 	},
-	"extra": {
-	   "installer-types": ["bower-asset", "npm-asset"],
-	   "installer-paths": {
-		   "lib/external/assets/{$name}/": ["type:bower-asset", "type:npm-asset"]
-	   }
-	},
 	"autoload": {
 		"psr-4": {"Event\\": "lib/event"}
 	},
@@ -28,8 +22,10 @@
 				"tigron/skeleton-file": "^2",
 				"tigron/skeleton-pager": "^3",
 				"tigron/skeleton-transaction": "^5.",
-				"npm-asset/tabler--core": "^1",
-				"tigron/skeleton-file-picture": "^0.2"
+				"npm-asset/tabler--core": "^1.4",
+				"tigron/skeleton-file-picture": "^0.2",
+				"bower-asset/tigron-confirm-modal": "^0.0.11",
+				"npm-asset/jquery": "^4.0"
 		},
     "license": "MIT",
     "authors": [

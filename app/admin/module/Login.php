@@ -61,9 +61,9 @@ class Login extends Module {
 			}
 
 			if (isset($_POST['remember'])) {
-				setcookie('peppyrus_login', $_POST['login'], time() + (10 * 365 * 24 * 60 * 60));
+				setcookie('sgraffito_login', $_POST['login'], time() + (10 * 365 * 24 * 60 * 60));
 			} else {
-				setcookie('peppyrus_login', $_POST['login'], time() - 3600);
+				setcookie('sgraffito_login', $_POST['login'], time() - 3600);
 			}
 
 			$_SESSION['user'] = $user;

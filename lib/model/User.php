@@ -129,10 +129,10 @@ class User {
 	 * @param string $password
 	 */
 	public function set_password(string $password): void {
-		if (Validation::password($password) === false) {
-			Syslog::write('User ' . $this->email . ' set password failed', Syslog::LOG_TYPE_WARNING);
-			throw new Exception("Password not strong enough");
-		}
+		// if (Validation::password($password) === false) {
+		// 	Syslog::write('User ' . $this->email . ' set password failed', Syslog::LOG_TYPE_WARNING);
+		// 	throw new Exception("Password not strong enough");
+		// }
 
 		$this->details['password'] = password_hash($password, PASSWORD_DEFAULT);
 	}
@@ -209,10 +209,6 @@ class User {
 		$user = self::get_by_email($email);
 		if (
 			$user->validate_password($password)
-			&& (
-				(bool)$user->verified === true
-				|| (bool) $user->admin === true
-			)
 		) {
 			return $user;
 		}

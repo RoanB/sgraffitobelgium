@@ -323,6 +323,12 @@ class Migration_20251017_170550_Init extends \Skeleton\Database\Migration {
 		");
 
 
+		$user = new \User();
+		$user->email = 'fe.buysse@outlook.be';
+		$user->set_password('test123');
+		$user->admin = true;
+		$user->save();
+
 		$db->query("
 			ALTER TABLE `file`
 			ADD `updated` datetime NULL;
