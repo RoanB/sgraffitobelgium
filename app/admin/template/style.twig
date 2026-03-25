@@ -1,0 +1,100 @@
+{% import '_default/macro.tabler.twig' as tabler %}
+{% extends '_default/layout.base.twig' %}
+
+{% block header_title %}{% trans "Styles" %}{% endblock header_title %}
+
+{% block header_breadcrumb %}
+	<li class="breadcrumb-item active" aria-current="page"><a href="#">{% trans "Styles" %}</a></li>
+{% endblock header_breadcrumb %}
+
+{% block content %}
+	<div class="row row-cards">
+		<div id="filter-card" class="{% if env.session.advanced_search is empty or env.session.advanced_search == 'false' %} d-none {% endif %} col-lg-3 pull-right">
+			<div class="card">
+				<div class="card-header border-bottom" style="height: 60px">
+					<div class="d-flex">
+						<div class="text-secondary col-12">
+							<btn class="btn btn-primary btn-sm" onclick="toggle_advanced(this)">{{ tabler.icon('adjustments-horizontal') }}</btn>
+							{% trans "Search" %}: <span class="text-muted fs-5">{{ pager.item_count }} {% trans 'results' %}</span>
+						</div>
+					</div>
+				</div>
+				<form id="filter-form" class="form" action="/style" method="post">
+					<div class="card-body">
+						<label class="col-form-label py-0">{% trans "Search" %}</label>
+						<div class="mb-0">
+							<input type="text" name="search" class="form-control" placeholder="{% trans 'Search' %}" value="{{ pager.get_search() }}"/>
+						</div>
+						<div class="mt-3">
+							<button type="submit" class="btn btn-primary btn-4 w-100">{% trans "Search" %}</button>
+							<button id="reset-button" class="btn btn-link btn-3 w-100">{% trans 'Reset to defaults' %}</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="{% if env.session.advanced_search == 'true' %} col-lg-9 {% else %} col-12 {% endif %}" id="result-card">
+			<div class="card">
+				<div class="card-header border-bottom" style="height: 60px">
+					<div class="d-flex">
+						<div class="text-secondary col-12 {% if env.session.advanced_search == 'true' %} d-none {% endif %}" id="small-search">
+							<btn class="btn btn-primary btn-sm" onclick="toggle_advanced(this)">{{ tabler.icon('adjustments-horizontal') }}</btn>
+							{% trans "Search" %}:
+							<div class="ms-2 d-inline-block">
+								<form method="post" action="/style">
+									<div class="input-group mb-0">
+										<input type="text" name="search" class="form-control form-control-sm" value="{{ pager.get_search() }}" />
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="card-actions">
+						<div class="dropdown">
+							<a href="#" class="btn-action dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								{{ tabler.icon('dots-vertical') }}
+							</a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="/style/create">{{ tabler.icon('plus', 'me-1') }}{% trans "Add style" %}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="table-responsive">
+					<table class="table card-table table-vcenter text-nowrap datatable table-striped table-hover">
+						{% if pager.items|length > 0 %}
+							<thead>
+							<tr>
+								<th>{{ pager.create_header('Name'|trans, 'identifier')|raw }}</th>
+								<th>{{ pager.create_header('Created'|trans, 'created')|raw }}</th>
+								<th class="w-1">&nbsp;</th>
+							</tr>
+							</thead>
+						{% endif %}
+						<tbody>
+						{% for style in pager.items %}
+							<tr>
+								<td>{{ style.text_en_name }}</td>
+								<td>{{ style.created|date }}</td>
+								<td class="text-end">
+									<a href="/style/detail?id={{ style.id }}">
+										{{ tabler.icon('edit') }}
+									</a>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer text-end d-flex align-items-center">
+					<p class="m-0 text-secondary">{{ pager.item_count }} {% trans "results" %}
+					{% if pager.items|length > 0 %}
+						{{ pager.links|raw }}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

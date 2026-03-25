@@ -1,0 +1,30 @@
+{% import '_default/macro.tabler.twig' as tabler %}
+{% extends '_default/layout.base.twig' %}
+
+{% block header_title %}{% trans "Create actor functionality" %}{% endblock header_title %}
+
+{% block header_breadcrumb %}
+	<li class="breadcrumb-item"><a href="/actor/functionality">{% trans "Actor functionalities" %}</a></li>
+	<li class="breadcrumb-item active" aria-current="page"><a href="#">{% trans "Create" %}</a></li>
+{% endblock header_breadcrumb %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-12">
+			<form method="post" action="/actor/functionality/create">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">{% trans "New actor functionality" %}</h3>
+					</div>
+					<div class="card-body">
+						{% include 'actor/functionality/_fields.twig' with {'edit_mode': false} %}
+					</div>
+					<div class="card-footer text-end">
+						<a href="/actor/functionality" class="btn btn-link">{% trans "Cancel" %}</a>
+						<button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

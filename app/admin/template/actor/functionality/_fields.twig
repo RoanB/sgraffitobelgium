@@ -1,0 +1,33 @@
+{% if edit_mode %}
+	<div class="mb-3 row">
+		<label class="col-3 col-form-label">{% trans "Identifier" %}</label>
+		<div class="col">
+			<input type="text" class="form-control" value="{{ actor_functionality.identifier }}" disabled />
+		</div>
+	</div>
+{% else %}
+	<div class="mb-3 row">
+		<label class="col-3 col-form-label">{% trans "Identifier" %}</label>
+		<div class="col">
+			<input type="text" name="actor_functionality[identifier]" class="form-control" value="{{ actor_functionality.identifier }}" />
+		</div>
+	</div>
+{% endif %}
+<div class="mb-3 row">
+	<label class="col-3 col-form-label">{% trans "Name (EN)" %}</label>
+	<div class="col">
+		<input type="text" name="actor_functionality[text_en_name]" class="form-control" value="{{ actor_functionality.text_en_name }}" />
+	</div>
+</div>
+<div class="mb-3 row">
+	<label class="col-3 col-form-label">{% trans "Name (NL)" %}</label>
+	<div class="col">
+		<input type="text" name="actor_functionality[text_nl_name]" class="form-control" value="{{ actor_functionality.text_nl_name }}" />
+	</div>
+</div>
+<div class="mb-3 row">
+	<label class="col-3 col-form-label">{% trans "Name (FR)" %}</label>
+	<div class="col">
+		<input type="text" name="actor_functionality[text_fr_name]" class="form-control" value="{{ actor_functionality.text_fr_name }}" />
+	</div>
+</div>

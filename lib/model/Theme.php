@@ -11,6 +11,7 @@ class Theme {
 	use \Skeleton\Object\Model;
 	use \Skeleton\Object\Get;
 	use \Skeleton\Object\Save;
+	use \Skeleton\Pager\Page;
 
 	/**
 	 * Text fields

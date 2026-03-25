@@ -104,7 +104,7 @@
 									{{ tabler.icon('dots-vertical') }}
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
-									<a class="dropdown-item" href="/building/type?action=create_step1">{{ tabler.icon('plus', 'me-1') }}{% trans "Add building type" %}</a>
+									<a class="dropdown-item" href="/building/type/create">{{ tabler.icon('plus', 'me-1') }}{% trans "Add building type" %}</a>
 								</div>
 							</div>
 						</div>
@@ -127,7 +127,7 @@
 									<td>{{ building_type.text_en_name }}</td>
 									<td>{{ building_type.created|date }}</td>
 									<td class="text-end">
-										<a href="/building/type/detail?number={{ building_type.number }}">
+										<a href="/building/type/detail?id={{ building_type.id }}">
 											{{ tabler.icon('edit') }}
 										</a>
 									</td>

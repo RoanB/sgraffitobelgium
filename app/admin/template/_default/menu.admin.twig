@@ -48,23 +48,38 @@
 				<div class="dropdown-menu-column">
 					<a class="dropdown-item" href="/building/type">
 						{{ tabler.icon('building') }}
-						{% trans 'Building type' %}
+						{% trans 'Building types' %}
 					</a>
-					<a class="dropdown-item" href="/province">
-						{{ tabler.icon('location-pin') }}
-						{% trans "To Add" %}
+					<a class="dropdown-item" href="/style">
+						{{ tabler.icon('brush') }}
+						{% trans "Styles" %}
+					</a>
+					<a class="dropdown-item" href="/theme">
+						{{ tabler.icon('tag') }}
+						{% trans "Themes" %}
+					</a>
+					<a class="dropdown-item" href="/actor/role">
+						{{ tabler.icon('id-badge') }}
+						{% trans "Actor roles" %}
+					</a>
+					<a class="dropdown-item" href="/actor/functionality">
+						{{ tabler.icon('tool') }}
+						{% trans "Actor functionalities" %}
+					</a>
+					<a class="dropdown-item" href="/application/method">
+						{{ tabler.icon('layers-intersect') }}
+						{% trans "Application methods" %}
+					</a>
+					<a class="dropdown-item" href="/sgraffito/condition">
+						{{ tabler.icon('heart-rate-monitor') }}
+						{% trans "Sgraffito conditions" %}
+					</a>
+					<a class="dropdown-item" href="/sgraffito/placement">
+						{{ tabler.icon('layout-distribute-vertical') }}
+						{% trans "Sgraffito placements" %}
 					</a>
 				</div>
 			</div>
 		</div>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="/subscription">
-			<span class="nav-link-title">
-				{{ tabler.icon('photo-scan') }}
-				{% trans "Media" %}
-			</span>
-		</a>
-	</li>
 </ul>
-
